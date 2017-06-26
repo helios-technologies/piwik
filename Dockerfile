@@ -27,9 +27,14 @@ COPY php.ini /usr/local/etc/php/php.ini
 RUN curl -fsSL -o /usr/src/piwik/misc/GeoIPCity.dat.gz http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz \
    && gunzip /usr/src/piwik/misc/GeoIPCity.dat.gz
 
-COPY docker-entrypoint.sh /entrypoint.sh
+
+# Install Kaigara
+RUN curl -sL https://kaigara.org/get | sh
+COPY operations /opt/kaigara/operations
+COPY resources /etc/kaigara/resources
+RUN chmod +x /opt/kaigara/operations/entrypoint.sh
 
 VOLUME /var/www/html
 
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["apache2-foreground"]
+ENTRYPOINT ["kaigara"]
+CMD ["start", "apache2-foreground"]

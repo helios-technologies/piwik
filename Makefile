@@ -7,5 +7,5 @@ build:
 	@echo "Building $(IMAGE):$(TAG)"
 	@docker build -t "$(IMAGE):$(TAG)" .
 start: build
-	@docker run -d --env="MYSQL_ROOT_PASSWORD=111111" --name="piwik-db" mysql
-	@docker run -d -p 80:80 --link piwik-db:db kaigara/piwik:latest
+	@docker run -d --env="MYSQL_ROOT_PASSWORD=heliostech" --name="db" mysql
+	@docker run -d -p 80:80 --link db:db --name="piwik" $(IMAGE):$(TAG)
