@@ -30,8 +30,11 @@ RUN curl -fsSL -o /usr/src/piwik/misc/GeoIPCity.dat.gz http://geolite.maxmind.co
 
 # Install Kaigara
 RUN curl -sL https://kaigara.org/get | sh
+
 COPY operations /opt/kaigara/operations
 COPY resources /etc/kaigara/resources
+COPY defaults.yml /etc/kaigara/metadata/defaults.yml
+
 RUN chmod +x /opt/kaigara/operations/entrypoint.sh
 
 VOLUME /var/www/html
