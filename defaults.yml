@@ -1,0 +1,5 @@
+db:
+  host: "db"
+  username: "root"
+  password: "heliostech"
+  dbname: "piwik"
